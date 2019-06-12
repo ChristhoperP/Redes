@@ -1,0 +1,83 @@
+<div class="col-md-12 order-md-1">
+    <form class="needs-validation" id="formulario-submeteo" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="red-principal">Red Principal:</label>
+                <input type="text" class="form-control" name="red-principal" id="red-principal" placeholder="0.0.0.0/0"
+                    value="" required>
+                <div class="invalid-feedback">
+                    Se requiere una red válida.
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Número de subredes:</label>
+                <input type="number" class="form-control" name="tamanio" id="tamanio" placeholder="" value="3" required>
+                <div class="invalid-feedback">
+                    Se requiere una cantidad válida.
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h4>Subredes:</h4>
+            </div>
+            <div class="col-md-6">
+                <label>Nombre:</label>
+            </div>
+            <div class="col-md-6">
+                <label>Tamaño:</label>
+            </div>
+        </div>
+
+        <!-- /////////////////////// -->
+        <div class="row" id="subredes">
+            <div class="col-md-6 mb-1 red-1">
+                <input type="text" class="form-control" name="primer-nombre" id="primer-nombre" placeholder=""
+                    value="A" required>
+                <div class="invalid-feedback">
+                    Se requiere una red.
+                </div>
+            </div>
+            <div class="col-md-6 mb-1 red-1">
+                <input type="number" class="form-control" name="segundo-nombre" id="segundo-nombre" placeholder=""
+                    value="" required>
+                <div class="invalid-feedback">
+                    Se requiere una cantidad.
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-1 red-2">
+                <input type="text" class="form-control" name="primer-nombre" id="primer-nombre" placeholder=""
+                    value="B" required>
+                <div class="invalid-feedback">
+                    Se requiere una red.
+                </div>
+            </div>
+            <div class="col-md-6 mb-1 red-2">
+                <input type="number" class="form-control" name="segundo-nombre" id="segundo-nombre" placeholder=""
+                    value="" required>
+                <div class="invalid-feedback">
+                    Se requiere una cantidad.
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-1 red-3">
+                <input type="text" class="form-control" name="primer-nombre" id="primer-nombre" placeholder=""
+                    value="C" required>
+                <div class="invalid-feedback">
+                    Se requiere una red.
+                </div>
+            </div>
+            <div class="col-md-6 mb-1 red-3">
+                <input type="number" class="form-control" name="segundo-nombre" id="segundo-nombre" placeholder=""
+                    value="" required>
+                <div class="invalid-feedback">
+                    Se requiere una cantidad.
+                </div>
+            </div>
+        </div>
+        <!-- ////////////////////////////// -->
+
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" style="width:40%; margin-left:auto; margin-right:auto;"
+            type="submit" id="registrar">Enviar</button>
+    </form>
+</div>
