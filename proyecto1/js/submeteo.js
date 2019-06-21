@@ -1,4 +1,18 @@
-// Example starter JavaScript for disabling form submissions if there are invalid fields
+//Variables locales
+var primerooct;
+var segundooct;
+var terceroct;
+var cuartooct;
+var prefijo = 19;
+var br;//bits de red
+var brc;//bits de host del octeto cambiante
+var occ;//octeto que cambia
+var ocval = 129;//el número del octeto que cambia
+var id;
+var broad;
+var mask;
+
+// Función para validar los campos del formulario
 (function () {
     'use strict';
 
@@ -19,63 +33,51 @@
                     var parametros = $("#formulario-submeteo").serialize();
                     console.log(parametros);
                 }
-                
+
             }, false);
         });
     }, false);
 })();
 
+//Evita que recargue la página :v
 $("#formulario-submeteo").submit(function () {
     return false;
 });
 
-$("#tamanio").val(3);
+//ID, Broadcast, mascara
+function calcular() {
+    br = prefijo - Math.floor(prefijo / 8) * 8;
+    brc = 8 - br;
+    occ = 4 - Math.floor(prefijo / 8);
 
-var ta=parseInt($("#tamanio").val());
-var letras = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    //aqui se obtendría el ocval segun el occ
 
-$("#tamanio").change(function(){
-    
-    var tn=parseInt($(this).val());
-    /* alert(tn); */
+    id = Math.floor(ocval / Math.pow(2, brc)) * Math.pow(2, brc);
 
-    if(tn>0 && tn<=27){
-        
-        if(tn>ta){
-            for (var index = ta+1; index <= tn; index++) {
-                $("#subredes").append(
-                    `<div class="col-md-6 mb-1 red-${index}">
-                        <input type="text" class="form-control" name="primer-nombre" id="primer-nombre" placeholder=""
-                            value="${letras[index-1]}" required>
-                        <div class="invalid-feedback">
-                            Se requiere una red.
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-1 red-${index}">
-                        <input type="number" class="form-control" name="segundo-nombre" id="segundo-nombre" placeholder=""
-                            value="" required>
-                        <div class="invalid-feedback">
-                            Se requiere una cantidad.
-                        </div>
-                    </div>
-                    `
-                );
-            }
-        }else if(tn<ta){
-            for (var index = ta; index > tn; index--) {
-                $(".red-"+index).remove();
-            }
-        }
+    broad = id + Math.pow(2, brc) - 1;
 
-        ta=tn;
-    }else{
-        alert("tiene que ser un número mayor que 0 y menor que 27.");
-        $(this).val(ta);
+    var c = 0;
+    for (let index = 0; index < brc; index++) {
+        c = c + Math.pow(2, index);
     }
 
-});
+    if (occ == 3) {
 
-function direccion(dir) {
-    /* . & / */
-    
+        mask = '255.' + (255 - c).toString() + '.0.0';
+
+    } else if (occ == 2) {
+        
+        mask = '255.255.' + (255 - c).toString() + '.0';
+
+    } else if (occ == 1) {
+        mask = '255.255.255.' + (255 - c).toString();
+    }
+
+    //alert(br + ', ' + brc + ', ' + occ + ', ' + id + ', ' + broad + ' mask: ' + mask);
+
 }
+
+//aquí ejecutar las funciones
+$(document).ready(function () {
+    calcular();
+});
