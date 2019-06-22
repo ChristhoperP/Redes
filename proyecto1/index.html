@@ -30,7 +30,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <h1>Calculadora de direccion IP</h1>
+                <h1 style="margin-top: 120px" class="mb-5">Calculadora de direccion IP</h1>
                 Direccion IP
                 <input type="text" class="campo" minlength="1" maxlength="3" onChange="validarSiNumero(this.value);"
                     id='o4'> .
@@ -43,8 +43,13 @@
                 <input type="text" class="campo" minlength="1" maxlength="2" onChange="validarSiNumero(this.value);"
                     id='prefijo'>
                 <button onclick='validar();'>Calcular</button>
+                <button onclick='otroEjercicio();'>Otro Ejercicio</button>
             </div>
         </div>
+
+    <div id="tabla-ip">
+
+    </div>
 
         <script src="js/jquery-3.3.1.js"></script>
         <script src="js/popper.min.js"></script>

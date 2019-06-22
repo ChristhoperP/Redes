@@ -53,7 +53,7 @@ function calcular() {
 
     //aqui se obtendría el ocval segun el occ
     ocval = parseInt($('#o' + occ).val());
-    alert('octeto cambia: ' + occ + ' valor del octeto: ' + ocval);
+    console.log('octeto cambia: ' + (occ-1) + ' valor del octeto: ' + ocval);
 
     id = Math.floor(ocval / Math.pow(2, brc)) * Math.pow(2, brc);
 
@@ -102,7 +102,7 @@ function TipoRed() {
 
 function validarSiNumero(numero) {
     if (!/^([0-9])*$/.test(numero))
-        alert("El valor " + numero + " no es un numero crack");
+        alert("El valor " + numero + " no es un numero!!!");
     return false;
 }
 
@@ -120,7 +120,7 @@ function validar() {
         (o3 >= 0 && o3 <= 255) &&
         (o4 >= 0 && o4 <= 255) &&
         (prefijoh >= 0 && prefijoh <= 30)) {
-        alert("El valor del prefijo " + prefijoh + " esta vergon ");
+        console.log("El valor del prefijo " + prefijoh + " esta solvente!");
 
         primerooct = o1;
         segundooct = o2;
@@ -139,7 +139,8 @@ function validar() {
         }
 
     } else {
-        alert("El valor no esta en el rango establecido crack verifica que este en [0-255] y el prefijo en [0-30]");
+        //alert("El valor no esta en el rango establecido crack verifica que este en [0-255] y el prefijo en [0-30]");
+        alert("Todos los campos deben estar llenos!!!");
     }
 
 }
@@ -161,10 +162,69 @@ function limpiar() {
 }
 
 function imprimir() {
-    alert('Tipo de red: ' + tipoRed +
+
+    var idFin;
+    var broadFin;
+    var rang1;
+    var rang2;
+
+    console.log('Tipo de red: ' + tipoRed +
         '\nbits de red: ' + br + ', \n' +
         'bits de host del oct cambiante: ' + brc + ', \n' +
         'Octeto que cambia: ' + occ + ', \n' +
         'ID: ' + id + ', \n' +
         'Broadcast: ' + broad + '\nmask: ' + mask);
+
+        if(occ == 3){
+            idFin = (cuartooct).toString() +'.'+ (id).toString() +'.0'+ '.0';
+            broadFin = (cuartooct).toString() +'.'+ (broad).toString() +'.255'+ '.255'; 
+            rang1 = (cuartooct).toString() +'.'+ (id).toString() +'.0'+ '.1';
+            rang2 = (cuartooct).toString() +'.'+ (broad).toString() +'.255'+ '.254'; 
+        }
+        else{
+            if(occ == 2){
+                idFin = (cuartooct).toString() +'.'+ (terceroct).toString() +'.'+ (id).toString() + '.0';
+                broadFin = (cuartooct).toString() +'.'+ (terceroct).toString() +'.'+ (broad).toString() + '.255';
+                rang1 = (cuartooct).toString() +'.'+ (terceroct).toString() +'.'+ (id).toString() + '.1';
+                rang2 = broadFin = (cuartooct).toString() +'.'+ (terceroct).toString() +'.'+ (broad).toString() + '.254';
+            }
+            else{
+                if(occ == 1){
+                    idFin = (cuartooct).toString() +'.'+ (terceroct).toString() +'.'+ (segundooct).toString() +'.'+ (id).toString();
+                    broadFin = (cuartooct).toString() +'.'+ (terceroct).toString() +'.'+ (segundooct).toString() +'.'+ (broad).toString();
+                    rang1 = (cuartooct).toString() +'.'+ (terceroct).toString() +'.'+ (segundooct).toString() +'.'+ (id+1).toString();
+                    rang2 = (cuartooct).toString() +'.'+ (terceroct).toString() +'.'+ (segundooct).toString() +'.'+ (broad-1).toString();
+                }
+            }
+        }
+
+        console.log("ID Final: " +idFin+'\n'+ "Broadcast: " +broadFin+'\n'+ "Rango: "+ rang1+ '--'+rang2);
+
+        $("#tabla-ip").append(
+            '<h1 class="mt-5">El Resultado es:</h1>'+
+
+            '<table class="table table-dark mt-3">'+
+                '<thead>'+
+                  '<tr>'+
+                    '<th style="text-align: center;" scope="col">ID</th>'+
+                    '<th style="text-align: center;" scope="col">Rango</th>'+
+                    '<th style="text-align: center;" scope="col">Broadcast</th>'+
+                  '</tr>'+
+                '</thead>'+
+    
+                '<tbody>'+
+                  '<tr class="bg-success">'+
+                    '<td style="text-align: center;" scope="row">'+ idFin +'</td>'+
+                    '<td style="text-align: center;" >'+ rang1 +" - "+ rang2 +'</td>'+
+                    '<td style="text-align: center;" >'+ broadFin +'</td>'+
+                  '</tr>'+
+                '</tbody>'+
+            '</table>'
+        );
+
+}
+
+function otroEjercicio(){
+    limpiar();
+    location.reload();
 }
