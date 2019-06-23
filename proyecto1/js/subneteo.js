@@ -206,6 +206,8 @@ function imprimir() {
             '<table class="table table-dark mt-3">'+
                 '<thead>'+
                   '<tr>'+
+                    '<th style="text-align: center;" scope="col">Tipo Red</th>'+
+                    '<th style="text-align: center;" scope="col">Mascara</th>'+
                     '<th style="text-align: center;" scope="col">ID</th>'+
                     '<th style="text-align: center;" scope="col">Rango</th>'+
                     '<th style="text-align: center;" scope="col">Broadcast</th>'+
@@ -214,6 +216,8 @@ function imprimir() {
     
                 '<tbody>'+
                   '<tr class="bg-success">'+
+                    '<td style="text-align: center;" scope="row">'+ tipoRed +'</td>'+
+                    '<td style="text-align: center;" scope="row">'+ mask +'</td>'+
                     '<td style="text-align: center;" scope="row">'+ idFin +'</td>'+
                     '<td style="text-align: center;" >'+ rang1 +" - "+ rang2 +'</td>'+
                     '<td style="text-align: center;" >'+ broadFin +'</td>'+
